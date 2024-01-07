@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block homeActive %}active{% endblock homeActive %}
+
+{% block content %}
+
+<!-- Here we have to add the logic to Display all the Students in the Table, also give the option to edit or Delete the Student -->
+
+<div class="container">
+
+    <div class="container my-5 alert alert-success">
+        <h1>Students Detail</h1>
+    </div>
+
+    <div class="container">
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>
+                        Sr No.
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Contact
+                    </th>
+                    <th>
+                        Opeations
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for td in students %}
+                <tr>
+                    <td>
+                        {{td.id}}
+                    </td>
+                    <td>
+                        {{td.s_name}}
+                    </td>
+                    <td>
+                        {{td.s_email}}
+                    </td>
+                    <td>
+                        {{td.s_contact}}
+                    </td>
+                    <td>
+                        <nav id="myNavbar" class="navbar navbar-expand-lg fw-bold text-center">
+                            <div class="container">
+                            </div>
+                            <div class="container-fluid mx-auto">
+                                <ul class="navbar-nav ml-auto d-flex justify-content-center">
+                                    <li class="nav-item">
+                                        <form method='post'>
+                                            {% csrf_token %}
+                                            <a class="btn btn-outline-warning mx-2"
+                                                href="{% url 'Edit' td.id %}">Edit</a>
+                                        </form>
+                                    </li>
+                                    <li class="nav-item">
+                                        <form method='get'>
+                                            {% csrf_token %}
+                                            <a class="btn btn-outline-danger mx-2"
+                                                href="{% url 'Delete' td.id %}">Delete</a>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="container">
+                            </div>
+                        </nav>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container my-3">
+        <a class="btn btn-success d-block text-center" href="{% url 'AddStudent' %}">
+            <h3>Add Student</h3>
+        </a>
+    </div>
+
+</div>
+
+{% endblock content %}

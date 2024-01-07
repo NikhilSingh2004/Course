@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Simple About Page, you can edit this page as you wish -->
+
+<div class="container alert alert-success my-5">
+    <h1 class="display-6">Add Student</h1>
+</div>
+
+<div class="container">
+
+    <form method="post" action="{% url 'AddStudent' %}" nonvaliate>
+        {% csrf_token %}
+        
+        {% for field in form %}
+
+            {{field}}
+            <br><br>
+
+        {% endfor %}
+
+        <button type="submit" class="btn btn-success">Save</button>
+
+    </form>
+
+</div>
+
+{% endblock content %}
